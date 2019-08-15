@@ -18,7 +18,7 @@ class Database {
         }
     }
 
-    // single pattern (menguji database agar tidak double koneksi)
+    // single pattern (menguji database agar tidak double koneksinya)
     public function getInstace()
     {
         // check variable instance
