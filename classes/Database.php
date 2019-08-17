@@ -19,12 +19,46 @@ class Database {
     }
 
     // single pattern (menguji database agar tidak double koneksinya)
-    public function getInstace()
+    public function getInstance()
     {
         // check variable instance
         if( !isset(self::$instance) )
             self::$instance = new Database();
 
         return self::$instance;
+    }
+
+    public function insert($table, $fields = [])
+    {
+        // get key to column
+        $column = implode(",", array_keys($fields));
+
+        // get value to values
+        $valueArrays = [];
+
+        foreach($fields as $key => $value){
+            // check value integer
+            if(is_int($value)){
+                $valueArrays[$key] = $this->escape($value);
+            }
+            $valueArrays[$key] = "'". $this->escape($value) ."'";
+        }
+
+        $values = implode(",", $valueArrays);
+        $query = "INSERT INTO $table ($column) VALUES ($values)";
+
+        // call func execute_query()
+        return $this->execute_query($query, "Ada masalah saat memasukan data");
+    }
+
+    public function execute_query($query, $error)
+    {
+        if($this->mysqli->query($query)) return true;
+        else die($error);
+    }
+
+    public function escape($query)
+    {
+        return $this->mysqli->real_escape_string($query);
     }
 }

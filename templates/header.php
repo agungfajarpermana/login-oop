@@ -13,8 +13,8 @@
         <h1>Halaman Login dan Register</h1>
 
         <nav>
-            <a href="#">Login</a>
-            <a href="#">Register</a>
-            <a href="#">Profile</a>
+            <a href="login.php">Login</a>
+            <a href="register.php">Register</a>
+            <a href="profile.php">Profile</a>
         </nav>
     </header>
